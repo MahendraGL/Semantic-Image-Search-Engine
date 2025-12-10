@@ -23,48 +23,41 @@ This project implements an end-to-end semantic search pipeline. Unlike tradition
 Clone the repository
 
 git clone [https://github.com/MahendraGL/Semantic-Image-Search-Engine.git](https://github.com/MahendraGL/Semantic-Image-Search-Engine.git)
+
 cd Semantic-Image-Search-Engine
 
 **Create a Virtual Environment (Optional but Recommended)**
+
 python -m venv venv
 * Windows:
 venv\Scripts\activate
 * Mac/Linux:
 source venv/bin/activate
 
-# Install Dependencies
+### Install Dependencies
 pip install -r requirements.txt
 
-##🏃 Usage
+## 🏃 Usage
 1. Prepare Data
 Download your image dataset (e.g., from Kaggle or your personal collection) and place the images (.jpg, .png, .jpeg) inside the data/images/ folder.
 
 2. Build the Index
-Run the indexing script. This will read all images, generate embeddings using ResNet50, and save the FAISS index.
+- Run the indexing script. This will read all images, generate embeddings using ResNet50, and save the FAISS index.
 python src/index_images.py
-Output: This creates vector.index and metadata.pkl in data/metadata/.
+- Output: This creates vector.index and metadata.pkl in data/metadata/.
 
 3. Search
 Query the database by providing a path to any image (it can be an image from the dataset or a completely new one).
 python src/search.py "path/to/test_image.jpg"
 
 ## 🧠 How It Works
-Preprocessing: Images are resized to 256x256, center-cropped to 224x224, and normalized using standard ImageNet mean/std values.
+- Preprocessing: Images are resized to 256x256, center-cropped to 224x224, and normalized using standard ImageNet mean/std values.
 
-Feature Extraction: The classification layer of ResNet50 is removed. We use the output of the final pooling layer to get a 2048 dimension vector for every image.
+- Feature Extraction: The classification layer of ResNet50 is removed. We use the output of the final pooling layer to get a 2048 dimension vector for every image.
 
-Indexing: These vectors are normalized (L2) and added to a IndexFlatIP FAISS index.
+- Indexing: These vectors are normalized (L2) and added to a IndexFlatIP FAISS index.
 
-Retrieval: When you search, the query image undergoes the same transformation. We calculate the dot product between the query vector and all database vectors to find the closest matches.
-
-📋 Requirements
-Python 3.8+
-torch
-torchvision
-faiss-cpu
-numpy
-Pillow
-tqdm
+- Retrieval: When you search, the query image undergoes the same transformation. We calculate the dot product between the query vector and all database vectors to find the closest matches.
 
 ## 📂 Repository Structure
 
