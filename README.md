@@ -27,9 +27,9 @@ cd Semantic-Image-Search-Engine
 
 **Create a Virtual Environment (Optional but Recommended)**
 python -m venv venv
-# Windows:
+* Windows:
 venv\Scripts\activate
-# Mac/Linux:
+* Mac/Linux:
 source venv/bin/activate
 
 Install Dependencies
